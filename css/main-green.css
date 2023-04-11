@@ -1723,6 +1723,10 @@ body > footer .copyrights {
   color: #a6a6a6;
 }
 
+.item img{
+  height: 14em;
+}
+
 .post-meta .item {
   display: inline-block;
   font-size: 13px;
