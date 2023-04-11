@@ -11,4 +11,4 @@ The project uses HTML, CSS and JS to build a static website to be used as a onli
 
 # Access
 
-The website can be reached at <igorcoraine.github.io>
+The website can be reached at <https://igorcoraine.github.io>
