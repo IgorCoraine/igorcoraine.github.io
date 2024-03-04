@@ -1426,6 +1426,48 @@ body > footer .copyrights {
 /* =======================================
 7.4. Portfolio subpage
 ======================================= */
+/* Style for repository list */
+#my_repos {
+  list-style: none;
+  padding: 0;
+}
+
+/* Style for each repository item */
+#my_repos li {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+#my_repos li:hover {
+  background-color: #e0e0e0;
+}
+
+/* Style for repository name */
+#my_repos li h3 {
+  margin: 0;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* Style for repository description */
+#my_repos li p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Style for repository languages */
+#my_repos li p.languages {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/**/
 .portfolio-grid {
   margin-left: -0.5em;
   margin-right: -0.5em;
