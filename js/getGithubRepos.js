@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('https://api.github.com/users/igorcoraine/repos') //github api
+    fetch('https://api.github.com/users/igorcoraine/repos?sort=updated') //github api
         .then(response => response.json())
         .then(data => {
             const repoList = document.getElementById('my_repos'); //portifolio div on html
