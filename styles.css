@@ -533,6 +533,13 @@
     text-decoration: none;
   }
 
+  /* Ícones em imagem (ex.: Énois) no mesmo tamanho dos ícones de fonte */
+  .link img {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
   .link:hover {
     border-color: #58a6ff;
     background: rgba(88, 166, 255, 0.08);
