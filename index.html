@@ -1,70 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="./script.js" defer></script>
-    <title>Igor Coraine | Industrial Automation Specialist and Developer</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./myCat.png">
+    <title>Igor Coraine | Automação Industrial e Desenvolvimento</title>
+    <link rel="shortcut icon" type="image/png" href="./icon.png">
 </head>
 <body>
-    <!-- Follower element for mouse tracking -->
-    <div id="follower"></div>
+<main class="pagina">
 
-    <header>
-        <div class="logo-container">
-            <img src="./me.jpg" alt="Logo" class="logo">
-            <h2 class="about" id="greeting">Hi, my name is Igor!</h2>
-            <h4 class="about" id="description">I am an industrial automation specialist with a strong passion for new technologies and software development.<br>Below, you will find a selection of personal projects that I have worked on.</h4>
+<header class="capa">
+  <div class="banner-grid"></div>
+
+  <div class="capa-topo">
+    <div class="foto">
+      <img src="./me.jpg" alt="Foto do Igor Coraine">
+    </div>
+    <div class="capa-texto">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span class="status-text">SISTEMA: ONLINE</span>
+      </div>
+      <h1>Oi, eu sou o Igor.</h1>
+      <p class="tagline">Especialista em <span>Automação Industrial</span>, apaixonado por novas tecnologias e desenvolvimento de software.</p>
+      <div class="links">
+        <a class="link fa fa-github" href="https://github.com/igorcoraine" target="_blank" rel="noopener noreferrer" aria-label="GitHub"></a>
+        <a class="link fa fa-linkedin" href="https://www.linkedin.com/in/igorcoraine" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTEIRA DE PRODUÇÃO AUTOMATIZADA COM ROBÔ -->
+  <div class="factory-zone" aria-hidden="true">
+
+    <!-- Robô Industrial Articulado -->
+    <div class="industrial-robot">
+      <div class="robot-base"></div>
+      <div class="robot-joint-1"></div>
+      <div class="robot-arm-lower">
+        <div class="robot-joint-2"></div>
+        <div class="robot-arm-upper">
+          <div class="robot-tool">
+            <div class="robot-weld-spark"></div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <nav>
-            <ul class="social-links">
-                <li class="scale">
-                    <a href="https://github.com/IgorCoraine" target="_blank" class="fab fa-github fa-lg"></a>
-                </li>
-                <li class="scale">
-                    <a href="https://www.linkedin.com/in/igorcoraine/" target="_blank" class="fab fa-linkedin fa-lg"></a>
-                </li>
-                <!-- Email dropdown -->
-                <div class="dropdown scale">
-                    <li class="dropbtn fas fa-envelope fa-lg"></li>
-                    <div class="dropdown-content">
-                        <li class ="noScale">
-                            <p id="textToCopy">igor.coraine@gmail.com
-                                <icon class="fa-regular fa-copy scale" id="copyButton"></icon>
-                            </p>
-                        </li>
-                    </div>
-                </div>
+    <!-- A Esteira Rolante -->
+    <div class="conveyor-belt">
+      <div class="conveyor-items">
+        <div class="skill-box"><span>🤖</span> TIA Openness API</div>
+        <div class="skill-box"><span>💻</span> C#</div>
+        <div class="skill-box"><span>🛢️</span> SQL Server</div>
+        <div class="skill-box"><span>📊</span> Supervisório</div>
+        <div class="skill-box"><span>📦</span> WMS</div>
+        <div class="skill-box"><span>🔄</span> Integração ERP</div>
+        <div class="skill-box"><span>🦾</span> WinCC Unified</div>
 
-                <!-- Language dropdown -->
-                <div class="dropdown scale">
-                    <li class="dropbtn fa-solid fa-language fa-lg"></li>
-                    <div class="dropdown-content">
-                        <li><button class="language-option" data-lang="en">English 
-                            <span class="check-icon fa-solid fa-check" id="check-en" style="display: none;"></span></button></li>
-                        <li><button class="language-option" data-lang="pt">Português 
-                            <span class="check-icon fa-solid fa-check" id="check-pt" style="display: none;"></span></button></li>
-                        <li><button class="language-option" data-lang="es">Español 
-                            <span class="check-icon fa-solid fa-check" id="check-es" style="display: none;"></span></button></li>
-                    </div>
-                </div>        
-            </ul>
-        </nav>
-    </header>
+        <!-- Repetição idêntica (mesmos itens, mesma ordem) para o loop sem emendas -->
+        <div class="skill-box"><span>🤖</span> TIA Openness API</div>
+        <div class="skill-box"><span>💻</span> C#</div>
+        <div class="skill-box"><span>🛢️</span> SQL Server</div>
+        <div class="skill-box"><span>📊</span> Supervisório</div>
+        <div class="skill-box"><span>📦</span> WMS</div>
+        <div class="skill-box"><span>🔄</span> Integração ERP</div>
+        <div class="skill-box"><span>🦾</span> WinCC Unified</div>
+      </div>
+    </div>
+  </div>
+</header>
 
-    <main>
-        <!-- Portfolio repository list -->
-        <ul id="my_repos" class="portfolio-grid"></ul>
+<section class="bio">
 
-        <!-- Floating cat image -->
-        <img src="./myCat.png" style="display: none;" class="scale" id="floating-cat" alt="My programming cat image">
+  <div class="secao">
+    <span class="rotulo">TRAJETÓRIA</span>
+    <p>Passei mais de 10 anos no chão de fábrica, programando CLPs e colocando robôs industriais para trabalhar.</p>
+    <p>Hoje atuo um degrau acima na pirâmide da automação, fazendo a <span class="destaque">gestão do sistema</span> de movimentação e armazenagem e <strong>integrando os dados</strong> entre fábrica, logística e o ERP. É onde o chão de fábrica encontra o software, que é exatamente onde eu gosto de estar.</p>
+  </div>
 
-        <!-- Cat message display -->
-        <div id="cat-message" style="display: none;">Free software<br>for a free society</div>
-    </main>
+  <div class="secao">
+    <span class="rotulo">FORA DO EXPEDIENTE</span>
+    <p>Divido a casa com minha esposa e <strong>quatro gatos</strong> 🐈‍⬛. Sou vegano 🌱, entusiasta da cultura Faça Você Mesmo 🔧 e adoro café ☕, chá 🍵 e tatuagens.</p>
+  </div>
+
+  <div class="secao">
+    <span class="rotulo">IDIOMAS</span>
+    <p>A profissão me levou a rodar o mundo e, com isso, veio o gosto por idiomas. Acredito que aprender nem que seja uma frase no idioma local é uma grande demonstração de respeito pela cultura do outro.</p>
+    <ul class="idiomas">
+      <li class="idioma">
+        <span class="idioma-nome">Inglês</span>
+        <div class="barra"><span style="width: 95%"></span></div>
+        <span class="idioma-nivel">fluente</span>
+      </li>
+      <li class="idioma">
+        <span class="idioma-nome">Espanhol</span>
+        <div class="barra"><span style="width: 65%"></span></div>
+        <span class="idioma-nivel">me viro bem</span>
+      </li>
+      <li class="idioma">
+        <span class="idioma-nome">Italiano</span>
+        <div class="barra"><span style="width: 15%"></span></div>
+        <span class="idioma-nivel">me arriscando</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="secao">
+    <span class="rotulo">MEU GITHUB</span>
+    <p>Alguns projetos pessoais que deixo fixados no meu perfil:</p>
+    <ul id="repos" class="repos"></ul>
+  </div>
+
+</section>
+
+</main>
 </body>
 </html>

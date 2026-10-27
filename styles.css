@@ -1,183 +1,613 @@
-/* Global Styles */
-body {
-    font-family: 'Arial', sans-serif;
+  /* ==========================================
+     PÁGINA
+     ========================================== */
+
+  html, body {
     margin: 0;
     padding: 0;
-    background-color: #1a1a1a;
-    color: #eaeaea;
-}
+    background: #010409;
+  }
 
-/* Header Styles */
-header {
+  /* Capa e bio empilhadas numa coluna centralizada */
+  .pagina {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .capa {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #0d1117; /* Grafite escuro industrial */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #1a1a1a;
-    padding: 1em 2em;
-}
+    justify-content: space-between;
+    padding: 18px 24px 16px;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace; /* Fonte código/CLP */
+    contain: layout paint; /* Isola a capa do resto da página */
+  }
 
-/* Link Styles */
-a {
-    text-decoration: none;
-    color: #eaeaea; /* Default link color */
-}
+  .capa *,
+  .capa *::before,
+  .capa *::after {
+    box-sizing: border-box;
+  }
 
-/* Logo Container */
-.logo-container {
-    text-align: center;
-}
+  /* Efeito de Grade de Engenharia ao fundo */
+  .capa .banner-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: 20px 20px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    z-index: 1;
+    pointer-events: none;
+  }
 
-.logo {
-    height: 20em;
-    width: 20em;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* About Section */
-.about {
-    margin-top: 1em;
-}
-
-/* Navigation Styles */
-nav {
-    width: 80%;
-    border-radius: 1em;
-    background-color: #2c2c2c;
-}
-
-nav ul.social-links {
-    list-style-type: none;
+  /* Texto no canto superior esquerdo, sem invadir a área do robô */
+  .capa .capa-topo {
+    position: relative;
+    z-index: 2;
     display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: max(360px, calc(100% - 400px));
+  }
+
+  /* Foto redonda, recortada no rosto (a imagem original é 960x1280) */
+  .capa .foto {
+    position: relative;
+    flex-shrink: 0;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #ffc107; /* Amarelo industrial, igual ao robô */
+    box-shadow: 0 0 0 4px #0d1117, 0 0 0 5px #30363d;
+    background: #161b22;
+  }
+
+  /* Janela de 400x400px da foto, a partir de (270, 380), centrada no rosto */
+  .capa .foto img {
+    position: absolute;
+    width: 240%;
+    height: auto;
+    left: -67.5%;
+    top: -95%;
+  }
+
+  /* Badge de Status (Estilo IHM/Supervisório) */
+  .capa .status-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(46, 160, 67, 0.15);
+    border: 1px solid #2ea043;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .capa .status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #39d353; /* Verde Run */
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px #39d353;
+    animation: statusBlink 2s ease-in-out infinite;
+  }
+
+  .capa .status-text {
+    color: #39d353;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .capa h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+
+  .capa .tagline {
+    color: #c9d1d9;
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.4;
+    font-weight: bold;
+  }
+
+  .capa .tagline span {
+    color: #58a6ff; /* Azul de destaque técnico */
+  }
+
+  /* ==========================================
+     SISTEMA DA ESTEIRA E ROBÔ INDUSTRIAL
+     ========================================== */
+
+  .capa .factory-zone {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  /* --- O ROBÔ INDUSTRIAL (preso à direita) --- */
+  .capa .industrial-robot {
+    position: absolute;
+    bottom: 38px; /* Apoiado sobre a esteira (altura da esteira) */
+    right: 263px; /* Calibrado para a ponta da tocha ficar sobre o centro da 2ª caixa (da direita) */
+    width: 80px;
+    height: 80px;
+    z-index: 3;
+    transform: scale(1.3);
+    transform-origin: bottom center;
+  }
+
+  /* Base do Robô */
+  .capa .robot-base {
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+    width: 30px;
+    height: 14px;
+    background: #161b22;
+    border: 2px solid #ffc107; /* Amarelo industrial */
+    border-radius: 4px 4px 0 0;
+  }
+
+  /* Articulação 1 (Ombro rotativo) */
+  .capa .robot-joint-1 {
+    position: absolute;
+    bottom: 12px;
+    left: 33px;
+    width: 14px;
+    height: 14px;
+    background: #21262d;
+    border: 2px solid #ffc107;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  /* Braço Inferior */
+  .capa .robot-arm-lower {
+    position: absolute;
+    bottom: 20px;
+    left: 36px;
+    width: 8px;
+    height: 35px;
+    background: #ffc107;
+    border-radius: 4px;
+    transform-origin: bottom center;
+    transform: rotate(10deg);
+    animation: lowerArmMove 4s ease-in-out infinite;
+  }
+
+  /* Articulação 2 (Cotovelo) */
+  .capa .robot-joint-2 {
+    position: absolute;
+    top: -4px;
+    left: -1px;
+    width: 10px;
+    height: 10px;
+    background: #161b22;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    z-index: 2;
+  }
+
+  /* Braço Superior (projeta para frente e desce até a esteira) */
+  .capa .robot-arm-upper {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 6px;
+    height: 40px;
+    background: #ffc107;
+    border-radius: 4px;
+    transform-origin: top center;
+    transform: rotate(-80deg);
+    animation: upperArmMove 4s ease-in-out infinite;
+  }
+
+  /* Cabeçote de Solda */
+  .capa .robot-tool {
+    position: absolute;
+    bottom: -8px;
+    left: -2px;
+    width: 10px;
+    height: 12px;
+    background: #8b949e;
+    border-radius: 2px;
+  }
+
+  /* Bico (formato cônico) */
+  .capa .robot-tool::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 2px;
+    width: 6px;
+    height: 7px;
+    background: #c9d1d9;
+    clip-path: polygon(20% 0%, 80% 0%, 60% 100%, 40% 100%);
+  }
+
+  /* Fagulha da solda: só aparece e pisca durante a solda */
+  .capa .robot-weld-spark {
+    position: absolute;
+    bottom: -14px;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #ffc107, 0 0 12px #ff5500;
+    opacity: 0;
+    animation: weldSpark 4s linear infinite;
+  }
+
+  /* --- A ESTEIRA ROLANTE (corre da esquerda para a direita) --- */
+  .capa .conveyor-belt {
+    position: relative;
+    width: 100%;
+    height: 38px;
+    background: #21262d;
+    border: 2px solid #30363d;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Caixas alinhadas pela direita, onde fica o robô */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .capa .conveyor-belt::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    left: -176px; /* Sobra de um passo para deslizar sem mostrar a borda */
+    background-image: linear-gradient(90deg, transparent 50%, rgba(0, 0, 0, 0.3) 50%);
+    background-size: 11px 100%; /* 16 listras por passo: o loop fecha sem emendas */
+    animation: beltRun 4s ease-in-out infinite;
+    opacity: 0.7;
+    z-index: 1;
+  }
+
+  .capa .conveyor-items {
+    display: flex;
+    flex-shrink: 0;
+    width: max-content;
+    position: relative;
+    z-index: 2;
+    animation: itemsMove 28s infinite; /* 7 caixas x 4s (um ciclo do robô por caixa) */
+  }
+
+  .capa .skill-box {
+    background: #161b22;
+    color: #58a6ff;
+    border: 1px solid #30363d;
+    width: 160px; /* Largura fixa: todas as caixas param no mesmo ponto embaixo do robô */
     justify-content: center;
+    padding: 3px 6px;
+    margin: 0 8px; /* Passo da esteira = 160 + 2 x 8 = 176px */
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .capa .skill-box span {
+    margin-right: 4px;
+  }
+
+  /* ==========================================
+     ANIMAÇÕES
+     ========================================== */
+
+  @keyframes statusBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /*
+    Ciclo sincronizado de 4s (esteira indexada):
+      0%  - 35%  esteira avança uma caixa, braço recolhido
+      35% - 50%  braço desce até a caixa
+      50% - 80%  solda (faísca)
+      80% - 100% braço sobe
+  */
+
+  /* O braço inferior inclina o torso para frente */
+  @keyframes lowerArmMove {
+    0%, 35%, 100% { transform: rotate(10deg); }
+    50%, 80% { transform: rotate(28deg); }
+  }
+
+  /* O braço superior desce até a caixa parada */
+  @keyframes upperArmMove {
+    0%, 35%, 100% { transform: rotate(-80deg); }
+    50%, 80% { transform: rotate(-40deg); }
+  }
+
+  /* A faísca só aparece (e pisca) com a tocha encostada na caixa */
+  @keyframes weldSpark {
+    0%, 51%  { opacity: 0; transform: scale(0.7); }
+    54%      { opacity: 1; transform: scale(1.4); }
+    58%, 66%, 74% { opacity: 1; transform: scale(0.8); }
+    62%, 70% { opacity: 1; transform: scale(1.4); }
+    77%      { opacity: 1; transform: scale(1.2); }
+    80%, 100% { opacity: 0; transform: scale(0.7); }
+  }
+
+  /* A lona anda junto com as caixas e para junto com elas */
+  @keyframes beltRun {
+    0% { transform: translateX(0); }
+    35%, 100% { transform: translateX(176px); }
+  }
+
+  /* Avança um passo (176px) para a direita nos primeiros 35% de cada janela de 4s */
+  @keyframes itemsMove {
+    0%       { transform: translateX(0); }
+    5%       { transform: translateX(176px); }
+    14.2857% { transform: translateX(176px); }
+    19.2857% { transform: translateX(352px); }
+    28.5714% { transform: translateX(352px); }
+    33.5714% { transform: translateX(528px); }
+    42.8571% { transform: translateX(528px); }
+    47.8571% { transform: translateX(704px); }
+    57.1429% { transform: translateX(704px); }
+    62.1429% { transform: translateX(880px); }
+    71.4286% { transform: translateX(880px); }
+    76.4286% { transform: translateX(1056px); }
+    85.7143% { transform: translateX(1056px); }
+    90.7143% { transform: translateX(1232px); }
+    100%     { transform: translateX(1232px); }
+  }
+
+  /* ==========================================
+     TAMANHOS DE CAPA MENORES
+     zoom encolhe tudo na mesma proporção, então a solda continua sincronizada
+     ========================================== */
+
+  @media (max-width: 760px) {
+    .capa { zoom: 0.8; height: 360px; }
+    .capa .industrial-robot { right: 87px; } /* Solda a 1ª caixa da direita: libera espaço para o texto */
+    .capa .capa-topo { max-width: 100%; }
+  }
+
+  @media (max-width: 560px) {
+    .pagina { padding: 12px 10px 32px; gap: 12px; }
+    .capa { zoom: 0.65; height: 480px; }
+    .capa .capa-topo { flex-direction: column; align-items: flex-start; }
+    .capa .foto { width: 96px; height: 96px; }
+  }
+
+  /* Respeita quem prefere menos movimento na tela */
+  @media (prefers-reduced-motion: reduce) {
+    .capa *,
+    .capa *::before,
+    .capa *::after {
+      animation: none !important;
+    }
+  }
+  .bio {
+    position: relative;
+    width: 100%;
+    background-color: #0d1117; /* Grafite escuro industrial */
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px; /* Grade de engenharia */
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 24px;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace; /* Fonte código/CLP */
+    color: #a8b1bb;
+  }
+
+  .bio *,
+  .bio *::before,
+  .bio *::after {
+    box-sizing: border-box;
+  }
+
+  /* Cada bloco é um "painel" de IHM */
+  .bio .secao + .secao {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px dashed #30363d;
+  }
+
+  .bio .rotulo {
+    display: inline-block;
+    color: #39d353; /* Verde Run */
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin: 0 0 8px 0;
+  }
+
+  .bio .rotulo::before {
+    content: '// ';
+    color: #2ea043;
+  }
+
+  .bio p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+  }
+
+  .bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .bio strong {
+    color: #c9d1d9;
+  }
+
+  .bio .destaque {
+    color: #58a6ff; /* Azul de destaque técnico */
+    font-weight: bold;
+  }
+
+  /* --- Idiomas como indicadores de nível --- */
+  .bio .idiomas {
+    list-style: none;
     padding: 0;
-}
+    margin: 12px 0 0 0;
+    display: grid;
+    gap: 8px;
+  }
 
-nav ul.social-links li {
-    margin-left: 1.25em; 
-}
+  .bio .idioma {
+    display: grid;
+    grid-template-columns: 7.5em 1fr auto;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+  }
 
-nav ul.social-links a {
-    color: white; /* Social link color */
-}
+  .bio .idioma-nome {
+    color: #c9d1d9;
+    font-weight: bold;
+  }
 
-/* Button Styles */
-#copyButton {
-    margin-left: 0.5em;
-}
+  .bio .barra {
+    height: 8px;
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    overflow: hidden;
+  }
 
-.scale:hover{
-    transform: scale(1.1);
-}
+  .bio .barra span {
+    display: block;
+    height: 100%;
+    background: #ffc107; /* Amarelo industrial */
+    border-radius: 3px;
+  }
 
-.dropbtn {
-    margin-left: 1.25em; 
-}
+  .bio .idioma-nivel {
+    color: #8b949e;
+    font-size: 0.75rem;
+    min-width: 9.5em;
+  }
 
-/* Dropdown Styles */
-.dropdown {
-    position: relative; 
-}
+  /* --- Links --- */
+  /* Ícones lado a lado */
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
 
-.dropdown-content {
-    display: none; /* Initially hidden */
-    position: absolute; 
-    background-color: #2c2c2c; 
-    min-width: 13rem; 
-    font-size: 0.8em; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+  .link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
 
-.dropdown:hover .dropdown-content {
-    display: block; 
-}
+  .link:hover {
+    border-color: #58a6ff;
+    background: rgba(88, 166, 255, 0.08);
+  }
 
-.dropdown-content button {
-   color: white; 
-   background: none; 
-   border: none; 
-   padding: 0.5rem 1rem; 
-   text-align: left; 
-   width: 100%; 
-   cursor: pointer; 
-}
+  .bio .link .prompt {
+    color: #ffc107;
+  }
 
-.dropdown-content button:hover {
-   background-color: #3d3d3d; 
-}
+  /* --- Repositórios fixados do GitHub --- */
+  .bio .repos {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
 
-/* Main Content Styles */
-main {
-    padding: 2em; 
-}
+  .bio .repo {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 14px 16px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+  }
 
-h1 {
-    text-align: center; 
-    margin-bottom: 2em; 
-}
+  .bio .repo:hover {
+    border-color: #58a6ff;
+    background: rgba(88, 166, 255, 0.08);
+  }
 
-/* Portfolio Grid Styles */
-.portfolio-grid {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    list-style-type: none; 
-}
+  .bio .repo-nome {
+    color: #58a6ff; /* Azul de destaque técnico */
+    font-weight: bold;
+    font-size: 0.9rem;
+    overflow-wrap: anywhere; /* Nomes longos com _ não estouram o cartão */
+  }
 
-.portfolio-grid a {
-    background-color: #2c2c2c; 
-    border-radius: 0.5em; 
-    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.5);
-    margin-bottom: 1.25em; 
-    padding: 1.25em; 
-    width: calc(100% - 2.5em); 
-    transition: background-color 0.3s, transform 0.3s;
-}
+  .bio .repo-nome::before {
+    content: '> ';
+    color: #ffc107;
+  }
 
-.portfolio-grid a:hover {
-    background-color: #3d3d3d; 
-    transform: translateY(-0.25em); 
-}
+  .bio .repo-descricao {
+    flex: 1;
+    margin: 8px 0 12px 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
 
-.portfolio-grid a h3,
-.portfolio-grid a p {
-   color: #eaeaea; /* Text color for portfolio items */
-   text-decoration: none; 
-}
+  .bio .repo-rodape {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.75rem;
+    color: #8b949e;
+  }
 
-.portfolio-grid a .more-details {
-   margin-top: 1em; 
-   font-size: 0.875em; 
-   color: #b0b0b0; /* Lighter gray for more details text */
-}
+  .bio .repo-cor {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: -1px;
+  }
 
-/* Follower Effect Styles */
-#follower {
-    position: absolute; 
-    width: 1.5em; 
-    height: 1.5em; 
-    background-color: rgba(44, 44, 44, 0.7);
-    border-radius: 50%; 
-    pointer-events: none; /* Prevent interaction */
-    transition: transform 0.1s ease; 
-}
-
-/* Floating Cat Image Styles */
-#floating-cat {
-    position: fixed;
-    bottom: 1.5em;
-    right: 1.5em;
-    width: 5em;
-    height:auto ; /* Maintain aspect ratio */
-}
-
-/* Cat Message Styles */
-#cat-message {
-    position: fixed;
-    bottom: 4.5em;
-    right:6em ;
-    background-color: rgba(44, 44, 44, 0.8);
-    padding: 1em;
-    border-radius: 0.3em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+  @media (max-width: 600px) {
+    .bio { padding: 18px 16px; }
+    .bio p { font-size: 0.9rem; }
+    .bio .idioma { grid-template-columns: 6.5em 1fr; }
+    .bio .idioma-nivel { display: none; } /* Em telas pequenas a barra já diz o nível */
+  }
