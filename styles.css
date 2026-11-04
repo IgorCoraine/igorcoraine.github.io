@@ -1,11 +1,32 @@
   /* ==========================================
+     PALETA (inspirada no SiePortal, tema escuro)
+     A mesma usada na capa e bio do perfil do Énóis
+     ========================================== */
+
+  :root {
+    --deep-blue: #000028;
+    --deep-blue-2: #23233c;
+    --deep-blue-3: #37374d;
+    --deep-blue-4: #4c4c68;
+    --petrol: #009999;
+    --teal: #00cccc;
+    --bold-green: #00ffb9;
+    --cyan: #00e6dc;
+    --text: #ffffff;
+    --text-soft: #b3b3be;
+    --text-muted: #9999a9;
+    --gradient: linear-gradient(90deg, #00ffb9 0%, #00e6dc 100%);
+    --fonte: "Siemens Sans", "Segoe UI", Arial, Helvetica, sans-serif;
+  }
+
+  /* ==========================================
      PÁGINA
      ========================================== */
 
   html, body {
     margin: 0;
     padding: 0;
-    background: #010409;
+    background: #00001a;
   }
 
   /* Capa e bio empilhadas numa coluna centralizada */
@@ -21,16 +42,19 @@
     position: relative;
     width: 100%;
     height: 300px;
-    border: 1px solid #30363d;
-    border-radius: 12px;
+    border: 1px solid var(--deep-blue-3);
+    border-radius: 2px;
     overflow: hidden;
-    background-color: #0d1117; /* Grafite escuro industrial */
+    background:
+      radial-gradient(ellipse 70% 120% at 100% 0%, rgba(0, 153, 153, 0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 90% at 0% 100%, rgba(0, 230, 220, 0.10) 0%, transparent 70%),
+      var(--deep-blue);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 18px 24px 16px;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; /* Fonte código/CLP */
+    font-family: var(--fonte);
     contain: layout paint; /* Isola a capa do resto da página */
   }
 
@@ -40,13 +64,25 @@
     box-sizing: border-box;
   }
 
-  /* Efeito de Grade de Engenharia ao fundo */
+  /* Linha de destaque com o gradiente da marca, como no header */
+  .capa::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gradient);
+    z-index: 4;
+  }
+
+  /* Grade de engenharia ao fundo, sumindo para a esquerda (atrás do texto) */
   .capa .banner-grid {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-size: 20px 20px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
     z-index: 1;
     pointer-events: none;
   }
@@ -69,9 +105,9 @@
     height: 112px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #ffc107; /* Amarelo industrial, igual ao robô */
-    box-shadow: 0 0 0 4px #0d1117, 0 0 0 5px #30363d;
-    background: #161b22;
+    border: 3px solid var(--teal); /* Mesma cor do robô */
+    box-shadow: 0 0 0 4px var(--deep-blue), 0 0 0 5px var(--deep-blue-3), 0 0 18px rgba(0, 255, 185, 0.25);
+    background: var(--deep-blue-2);
   }
 
   /* Janela de 400x400px da foto, a partir de (270, 380), centrada no rosto */
@@ -87,49 +123,53 @@
   .capa .status-badge {
     display: inline-flex;
     align-items: center;
-    background: rgba(46, 160, 67, 0.15);
-    border: 1px solid #2ea043;
-    padding: 4px 10px;
-    border-radius: 20px;
+    background: rgba(0, 255, 185, 0.10);
+    border: 1px solid rgba(0, 255, 185, 0.45);
+    padding: 3px 10px;
+    border-radius: 2px;
     margin-bottom: 10px;
   }
 
   .capa .status-dot {
     width: 8px;
     height: 8px;
-    background-color: #39d353; /* Verde Run */
+    background-color: var(--bold-green);
     border-radius: 50%;
     margin-right: 8px;
-    box-shadow: 0 0 8px #39d353;
+    box-shadow: 0 0 8px var(--bold-green);
     animation: statusBlink 2s ease-in-out infinite;
   }
 
   .capa .status-text {
-    color: #39d353;
+    color: var(--bold-green);
     font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
   }
 
   .capa h1 {
-    color: #ffffff;
+    color: var(--text);
     font-size: 2rem;
     margin: 0 0 6px 0;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
     line-height: 1.15;
   }
 
   .capa .tagline {
-    color: #c9d1d9;
+    color: var(--text-soft);
     font-size: 1rem;
     margin: 0;
     line-height: 1.4;
-    font-weight: bold;
+    font-weight: 400;
   }
 
   .capa .tagline span {
-    color: #58a6ff; /* Azul de destaque técnico */
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
   }
 
   /* ==========================================
@@ -162,9 +202,9 @@
     left: 25px;
     width: 30px;
     height: 14px;
-    background: #161b22;
-    border: 2px solid #ffc107; /* Amarelo industrial */
-    border-radius: 4px 4px 0 0;
+    background: var(--deep-blue-2);
+    border: 2px solid var(--teal);
+    border-radius: 2px 2px 0 0;
   }
 
   /* Articulação 1 (Ombro rotativo) */
@@ -174,8 +214,8 @@
     left: 33px;
     width: 14px;
     height: 14px;
-    background: #21262d;
-    border: 2px solid #ffc107;
+    background: var(--deep-blue-3);
+    border: 2px solid var(--teal);
     border-radius: 50%;
     z-index: 2;
   }
@@ -187,7 +227,7 @@
     left: 36px;
     width: 8px;
     height: 35px;
-    background: #ffc107;
+    background: var(--teal);
     border-radius: 4px;
     transform-origin: bottom center;
     transform: rotate(10deg);
@@ -201,7 +241,7 @@
     left: -1px;
     width: 10px;
     height: 10px;
-    background: #161b22;
+    background: var(--deep-blue);
     border-radius: 50%;
     border: 1px solid #ffffff;
     z-index: 2;
@@ -214,7 +254,7 @@
     left: 1px;
     width: 6px;
     height: 40px;
-    background: #ffc107;
+    background: var(--teal);
     border-radius: 4px;
     transform-origin: top center;
     transform: rotate(-80deg);
@@ -228,7 +268,7 @@
     left: -2px;
     width: 10px;
     height: 12px;
-    background: #8b949e;
+    background: var(--deep-blue-4);
     border-radius: 2px;
   }
 
@@ -240,7 +280,7 @@
     left: 2px;
     width: 6px;
     height: 7px;
-    background: #c9d1d9;
+    background: var(--text-soft);
     clip-path: polygon(20% 0%, 80% 0%, 60% 100%, 40% 100%);
   }
 
@@ -253,7 +293,7 @@
     height: 6px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 6px #ffc107, 0 0 12px #ff5500;
+    box-shadow: 0 0 6px var(--bold-green), 0 0 12px var(--cyan);
     opacity: 0;
     animation: weldSpark 4s linear infinite;
   }
@@ -263,9 +303,10 @@
     position: relative;
     width: 100%;
     height: 38px;
-    background: #21262d;
-    border: 2px solid #30363d;
-    border-radius: 6px;
+    background: var(--deep-blue-2);
+    border: 1px solid var(--deep-blue-3);
+    border-bottom: 2px solid var(--petrol);
+    border-radius: 2px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -295,20 +336,21 @@
   }
 
   .capa .skill-box {
-    background: #161b22;
-    color: #58a6ff;
-    border: 1px solid #30363d;
+    background: var(--deep-blue);
+    color: var(--text);
+    border: 1px solid var(--deep-blue-4);
+    border-left: 3px solid var(--bold-green);
     width: 160px; /* Largura fixa: todas as caixas param no mesmo ponto embaixo do robô */
     justify-content: center;
     padding: 3px 6px;
     margin: 0 8px; /* Passo da esteira = 160 + 2 x 8 = 176px */
-    border-radius: 4px;
+    border-radius: 2px;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 700;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
 
   .capa .skill-box span {
@@ -405,19 +447,33 @@
       animation: none !important;
     }
   }
+
+  /* ==========================================
+     BIO
+     ========================================== */
+
   .bio {
     position: relative;
     width: 100%;
-    background-color: #0d1117; /* Grafite escuro industrial */
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px; /* Grade de engenharia */
-    border: 1px solid #30363d;
-    border-radius: 12px;
+    background:
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0, 153, 153, 0.22) 0%, transparent 70%),
+      var(--deep-blue);
+    border: 1px solid var(--deep-blue-3);
+    border-radius: 2px;
     padding: 24px;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; /* Fonte código/CLP */
-    color: #a8b1bb;
+    font-family: var(--fonte);
+    color: var(--text-soft);
+    overflow: hidden;
+  }
+
+  /* Linha de destaque com o gradiente da marca, como no header */
+  .bio::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gradient);
   }
 
   .bio *,
@@ -426,25 +482,22 @@
     box-sizing: border-box;
   }
 
-  /* Cada bloco é um "painel" de IHM */
   .bio .secao + .secao {
     margin-top: 22px;
     padding-top: 18px;
-    border-top: 1px dashed #30363d;
+    border-top: 1px solid var(--deep-blue-3);
   }
 
   .bio .rotulo {
     display: inline-block;
-    color: #39d353; /* Verde Run */
+    color: var(--bold-green);
     font-size: 11px;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 1.5px;
     margin: 0 0 8px 0;
-  }
-
-  .bio .rotulo::before {
-    content: '// ';
-    color: #2ea043;
+    padding-left: 10px;
+    border-left: 3px solid var(--bold-green);
+    line-height: 1.2;
   }
 
   .bio p {
@@ -458,12 +511,12 @@
   }
 
   .bio strong {
-    color: #c9d1d9;
+    color: var(--text);
   }
 
   .bio .destaque {
-    color: #58a6ff; /* Azul de destaque técnico */
-    font-weight: bold;
+    color: var(--teal);
+    font-weight: 700;
   }
 
   /* --- Idiomas como indicadores de nível --- */
@@ -484,33 +537,34 @@
   }
 
   .bio .idioma-nome {
-    color: #c9d1d9;
-    font-weight: bold;
+    color: var(--text);
+    font-weight: 700;
   }
 
   .bio .barra {
-    height: 8px;
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 4px;
+    height: 6px;
+    background: var(--deep-blue-2);
+    border: 1px solid var(--deep-blue-3);
+    border-radius: 0;
     overflow: hidden;
   }
 
   .bio .barra span {
     display: block;
     height: 100%;
-    background: #ffc107; /* Amarelo industrial */
-    border-radius: 3px;
+    background: var(--gradient);
   }
 
   .bio .idioma-nivel {
-    color: #8b949e;
+    color: var(--text-muted);
     font-size: 0.75rem;
     min-width: 9.5em;
   }
 
-  /* --- Links --- */
-  /* Ícones lado a lado */
+  /* ==========================================
+     LINKS (ícones no estilo dos botões do SiePortal)
+     ========================================== */
+
   .links {
     display: flex;
     flex-wrap: wrap;
@@ -525,28 +579,29 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    color: #fff;
+    background: transparent;
+    border: 1px solid var(--teal);
+    border-radius: 2px;
+    color: var(--teal);
     font-size: 1.1rem;
     text-decoration: none;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
 
-  /* Ícones em imagem (ex.: Énois) no mesmo tamanho dos ícones de fonte */
-  .link img {
+  /* Logo do Énois usado como máscara: pinta com a cor do link (inclusive no hover) */
+  .link .icone-enois {
     width: 20px;
     height: 20px;
     display: block;
+    background-color: currentColor;
+    -webkit-mask: url(./enois.svg) center / contain no-repeat;
+            mask: url(./enois.svg) center / contain no-repeat;
   }
 
   .link:hover {
-    border-color: #58a6ff;
-    background: rgba(88, 166, 255, 0.08);
-  }
-
-  .bio .link .prompt {
-    color: #ffc107;
+    background: rgba(0, 204, 204, 0.12);
+    border-color: var(--bold-green);
+    color: var(--bold-green);
   }
 
   /* --- Repositórios fixados do GitHub --- */
@@ -564,28 +619,30 @@
     flex-direction: column;
     height: 100%;
     padding: 14px 16px;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
+    background: var(--deep-blue-2);
+    border: 1px solid var(--deep-blue-3);
+    border-left: 3px solid var(--bold-green); /* Igual às caixas da esteira */
+    border-radius: 2px;
     text-decoration: none;
     color: inherit;
+    transition: background 0.15s, border-color 0.15s;
   }
 
   .bio .repo:hover {
-    border-color: #58a6ff;
-    background: rgba(88, 166, 255, 0.08);
+    border-color: var(--teal);
+    border-left-color: var(--bold-green);
+    background: rgba(0, 204, 204, 0.08);
   }
 
   .bio .repo-nome {
-    color: #58a6ff; /* Azul de destaque técnico */
-    font-weight: bold;
+    color: var(--teal);
+    font-weight: 700;
     font-size: 0.9rem;
     overflow-wrap: anywhere; /* Nomes longos com _ não estouram o cartão */
   }
 
-  .bio .repo-nome::before {
-    content: '> ';
-    color: #ffc107;
+  .bio .repo:hover .repo-nome {
+    color: var(--bold-green);
   }
 
   .bio .repo-descricao {
@@ -600,7 +657,7 @@
     flex-wrap: wrap;
     gap: 14px;
     font-size: 0.75rem;
-    color: #8b949e;
+    color: var(--text-muted);
   }
 
   .bio .repo-cor {
